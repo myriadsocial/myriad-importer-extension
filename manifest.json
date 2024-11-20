@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Myriad Extension",
-  "version": "1.0",
+  "version": "1.022",
   "description": "Import and Post to Myriad",
   "permissions": [
     "activeTab", 
@@ -9,8 +9,10 @@
     "*://*.twitter.com/*",
     "*://*.reddit.com/*",
     "*://*.twitch.tv/*",
-    "*://*.youtube.com/*"
+    "*://*.youtube.com/*",
+    "*://*.facebook.com/*"
   ],
+
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
