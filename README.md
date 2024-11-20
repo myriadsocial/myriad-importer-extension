@@ -74,3 +74,48 @@ The extension provides several key functionalities:
   - `/user/posts/import` - Content importing
   - `/user/experiences` - Experience management
   - `/experiences/post` - Adding posts to experiences
+
+## Building and Packaging
+
+### Development Build
+To test the extension locally:
+1. Open Chrome and navigate to `chrome://extensions/`
+2. Enable "Developer mode" (toggle in top right)
+3. Click "Load unpacked"
+4. Select your extension directory
+
+### Production Build
+To package the extension for the Chrome Web Store:
+
+1. Clean the build directory:
+```bash
+rm -rf build/
+mkdir -p build
+```
+
+2. Create the distribution package:
+```bash
+zip -r build/extension_store.zip \
+  manifest.json \
+  popup.html \
+  popup.js \
+  background.js \
+  contentScript.js \
+  myriadlogo16.png \
+  myriadlogo48.png \
+  myriadlogo128.png
+```
+
+3. Create the Chrome extension package (optional):
+- Open Chrome and go to `chrome://extensions/`
+- Enable "Developer mode"
+- Click "Pack extension"
+- Select your extension directory
+- Click "Pack Extension"
+- Move the generated files:
+```bash
+mv extension.crx build/extension_store.crx
+mv extension.pem build/extension.pem
+```
+
+The `build/extension_store.zip` file can be submitted to the Chrome Web Store for publication.
