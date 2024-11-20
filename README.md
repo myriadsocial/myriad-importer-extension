@@ -14,22 +14,23 @@ The extension provides several key functionalities:
 ### Authentication
 - Uses a magic link authentication system via email
 - Authenticates through the Myriad.social API (`api.myriad.social/authentication`)
-- Stores authentication tokens and username locally for persistent sessions
+- Stores authentication tokens and username in local storage for persistent sessions
+- Includes logout functionality with confirmation dialog
 
 ### Content Import Support
 1. **Twitter Posts**
-   - Automatically detects Twitter post URLs (`twitter.com/{username}/status/{id}`)
-   - Shows an "i" badge when the post is already imported to Myriad
-   - Imports posts with their content to Myriad
+   - Automatically detects Twitter post URLs
+   - Imports posts directly to selected Myriad Experience
+   - Shows preview of imported posts in embedded iframe
 
 2. **Reddit Posts**
-   - Detects Reddit post URLs (`reddit.com/r/{subreddit}/comments/{id}`)
-   - Similar badge notification system as Twitter
-   - Enables direct importing of Reddit content
+   - Detects Reddit post URLs
+   - Direct importing to selected Myriad Experience
+   - Shows preview of imported posts in embedded iframe
 
 3. **YouTube Integration**
    - Automatically converts YouTube URLs to embedded iframes
-   - Supports custom captions
+   - Supports optional captions
    - Full-width responsive video player integration
 
 4. **Twitch Integration**
@@ -37,31 +38,39 @@ The extension provides several key functionalities:
    - Automatically configures proper parent domain settings
    - Supports channel streaming embeds
 
-### Text Selection Features
-- Supports selecting and formatting text from any webpage
-- Truncates selections to 1000 characters
-- Removes empty lines automatically
-- Formats text with italic styling
+5. **Facebook Integration**
+   - Supports embedding of Facebook posts and videos
+   - Automatic conversion of mobile/web URLs to proper embed format
+   - Responsive iframe implementation
+
+### Experience Management
+- Automatic creation of default Experience if none exists
+- Experience selector with refresh capability
+- Stores selected Experience as default in local storage
+- Direct links to selected Experience page
 
 ### UI Components
 - Clean, responsive popup interface
 - Purple gradient buttons with hover effects
-- User feedback system for actions
+- Loading spinner for async operations
+- User feedback system with timed messages
 - Conditional display of import/post options based on current URL
 - Embedded post preview iframe for existing content
+- Logout confirmation dialog
 
 ## Technical Components
 
-- `background.js`: Monitors tab URLs and manages badge notifications
-- `contentScript.js`: Handles text selection and formatting
+- `background.js`: Manages Experience data and background tasks
+- `contentScript.js`: Handles text grabbing from pages
 - `popup.js`: Controls the extension's UI, authentication, and API interactions
 - Custom styling with Mulish font family
 - Secure API integration with Myriad.social endpoints
 
 ## API Integration
 - Base URL: `https://api.myriad.social`
-- Endpoints used:
+- Key endpoints:
   - `/authentication/otp/email` - Magic link generation
   - `/authentication/login/otp` - Authentication
   - `/user/posts/import` - Content importing
-  - `/user/posts` - Post creation and retrieval
+  - `/user/experiences` - Experience management
+  - `/experiences/post` - Adding posts to experiences
