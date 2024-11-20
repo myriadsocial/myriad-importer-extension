@@ -3,6 +3,9 @@ build/
 *.crx
 *.pem
 *.zip
+!extension_store.crx
+!extension_store.zip
+!extension_installer.zip
 
 # IDE and editor files
 .vscode/
